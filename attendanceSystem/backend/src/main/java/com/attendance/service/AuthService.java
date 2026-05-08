@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
+
 
 @Service
 @RequiredArgsConstructor
@@ -50,7 +52,8 @@ public class AuthService {
                 .fullName(request.getFullName())
                 .role(Role.valueOf(request.getRole().toUpperCase()))
                 .build();
-        userRepository.save(user);
+        userRepository.save(Objects.requireNonNull(user));
+
         return toDto(user);
     }
 
